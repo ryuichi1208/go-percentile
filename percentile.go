@@ -18,7 +18,7 @@ func calc(nums interface{}, n int) (num interface{}, err error) {
 	case sort.Float64Slice:
 		nums := nums.(sort.Float64Slice)
 		i := len(nums)*n/100 - 1
-		if len(nums)*n/100-1 < 0 {
+		if i < 0 {
 			return nil, errors.New("too little elements")
 		}
 		return nums[i], nil
@@ -49,7 +49,6 @@ func percentileN(list interface{}, n int) (nums interface{}, err error) {
 	}
 	if len(numsInt) > 0 {
 		sort.Sort(numsInt)
-		fmt.Println(n)
 		return calc(numsInt, n)
 	}
 
@@ -60,7 +59,7 @@ func percentileN(list interface{}, n int) (nums interface{}, err error) {
 			numsFloat = append(numsFloat, float64(v))
 		}
 	case []float64:
-		for _, v := range list.([]float32) {
+		for _, v := range list.([]float64) {
 			numsFloat = append(numsFloat, float64(v))
 		}
 	default:
@@ -68,5 +67,13 @@ func percentileN(list interface{}, n int) (nums interface{}, err error) {
 		return nums, errors.New("Not Support type")
 	}
 
-	return numsFloat, nil
+	return calc(numsFloat, n)
+}
+
+func main() {
+	var t1 []float64
+	for i := 0; i < 1000001; i++ {
+		t1 = append(t1, float64(i))
+	}
+	fmt.Println(percentileN(t1, 100))
 }

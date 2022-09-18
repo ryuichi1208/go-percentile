@@ -35,6 +35,8 @@ func Test_calc(t *testing.T) {
 func Test_percentileN(t *testing.T) {
 	var t1, t2 []int
 	var t3 []int64
+	var t5 []float64
+	var t6 []float32
 	for i := 1; i < 101; i++ {
 		t1 = append(t1, i)
 	}
@@ -47,6 +49,12 @@ func Test_percentileN(t *testing.T) {
 	// for i := 1; i < 9223372036854775807; i++ {
 	// 	t4 = append(t4, int64(i))
 	// }
+	for i := 1; i < 101; i++ {
+		t5 = append(t5, float64(i))
+	}
+	for i := 1; i < 101; i++ {
+		t6 = append(t6, float32(i))
+	}
 	type args struct {
 		list interface{}
 		n    int
@@ -93,6 +101,24 @@ func Test_percentileN(t *testing.T) {
 		// 	wantNums: 1,
 		// 	wantErr:  false,
 		// },
+		{
+			name:     "test7",
+			args:     args{list: []string{}, n: 100},
+			wantNums: nil,
+			wantErr:  true,
+		},
+		{
+			name:     "test8",
+			args:     args{list: t5, n: 100},
+			wantNums: float64(100),
+			wantErr:  false,
+		},
+		{
+			name:     "test9",
+			args:     args{list: t6, n: 100},
+			wantNums: float64(100),
+			wantErr:  false,
+		},
 	}
 
 	for _, tt := range tests {
