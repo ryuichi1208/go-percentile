@@ -1,0 +1,83 @@
+package main
+
+import (
+	"reflect"
+	"testing"
+)
+
+func Test_calc(t *testing.T) {
+	type args struct {
+		nums interface{}
+		n    int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantNum interface{}
+		wantErr bool
+	}{
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotNum, err := calc(tt.args.nums, tt.args.n)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("calc() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(gotNum, tt.wantNum) {
+				t.Errorf("calc() = %v, want %v", gotNum, tt.wantNum)
+			}
+		})
+	}
+}
+
+func Test_percentileN(t *testing.T) {
+	type args struct {
+		list interface{}
+		n    int
+	}
+	tests := []struct {
+		name     string
+		args     args
+		wantNums interface{}
+		wantErr  bool
+	}{
+		name: "test1",
+		args: []int{1,2,3,4,5},
+		wantNums: 3,
+		wantErr false,
+	},
+	{
+		name: "test1".
+		args: []int{1,2,3,4,5},
+		wantNums: 3,
+		wantErr false,
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotNums, err := percentileN(tt.args.list, tt.args.n)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("percentileN() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(gotNums, tt.wantNums) {
+				t.Errorf("percentileN() = %v, want %v", gotNums, tt.wantNums)
+			}
+		})
+	}
+}
+
+func Test_main(t *testing.T) {
+	tests := []struct {
+		name string
+	}{
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			main()
+		})
+	}
+}
