@@ -1,4 +1,4 @@
-package main
+package percentile
 
 import (
 	"errors"
@@ -26,7 +26,7 @@ func calc(nums interface{}, n int) (num interface{}, err error) {
 	return nil, nil
 }
 
-func percentileN(list interface{}, n int) (nums interface{}, err error) {
+func PercentileN(list interface{}, n int) (nums interface{}, err error) {
 
 	if n > 100 {
 		return nil, errors.New("Please specify less than 100")
@@ -68,12 +68,4 @@ func percentileN(list interface{}, n int) (nums interface{}, err error) {
 	}
 
 	return calc(numsFloat, n)
-}
-
-func main() {
-	var t1 []float64
-	for i := 0; i < 1000001; i++ {
-		t1 = append(t1, float64(i))
-	}
-	fmt.Println(percentileN(t1, 100))
 }
